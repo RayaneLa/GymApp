@@ -1,19 +1,2 @@
-/* Remove max-width and margin from #root */
-#root {
-  padding: 0;
-  text-align: left;
-  width: 100%;
-}
 
-/* Main layout for the app */
-.app-container {
-  display: flex;
-  height: 100vh;
-  width: 100%; /* Ensure the container takes full width */
-}
 
-/* Main layout */
-.app-container {
-  display: flex;
-  height: 100vh;
-}

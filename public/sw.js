@@ -22,9 +22,10 @@ self.addEventListener("install", (event) => {
 // Serve cached content when offline
 self.addEventListener("fetch", (event) => {
     event.respondWith(
-        fetch(event.request).catch(() => caches.match(event.request))
+      fetch(event.request).catch(() => new Response("Offline", { status: 503 }))
     );
-});
+  });
+  
 
 // Update cache when new service worker is installed
 self.addEventListener("activate", (event) => {

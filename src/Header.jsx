@@ -1,37 +1,68 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import "./Header.css";
+import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
-function Header() {
-  const { t, i18n } = useTranslation(); // ✅ Get t and i18n from the hook
+const Header = () => {
+  const { t, i18n } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Language change function
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
   return (
-    <div className="sidebar">
+    <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+      {/* Hamburger menu button */}
+      <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+        ☰
+      </button>
+
       <nav>
         <ul>
-          <li><Link to="/">{t("home")}</Link></li>
-          <li><Link to="/profile">{t("profile")}</Link></li>
-          <li><Link to="/reservations">{t("reservations")}</Link></li>
-          <li><Link to="/booking">{t("booking")}</Link></li>
-          <li><Link to="/subscription_info">{t("subscription")}</Link></li>
-          <li><Link to="/diary_schedule">{t("diary_schedule")}</Link></li>
+          <li>
+            <NavLink to="/">
+              <span>{t("home")}</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/profile">
+              <span>{t("profile")}</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/reservations">
+              <span>{t("reservations")}</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/booking">
+              <span>{t("booking")}</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/subscription_info">
+              <span>{t("subscription_info")}</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/diary_schedule">
+              <span>{t("diary_schedule")}</span>
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
+      {/* Language Switcher */}
       <div className="language-switcher">
         <select onChange={(e) => changeLanguage(e.target.value)}>
-          <option value="en">{t("english")}</option>
-          <option value="fr">{t("french")}</option>
-          <option value="nl">{t("dutch")}</option>
+          <option value="en">English</option>
+          <option value="nl">Nederlands</option>
+          <option value="fr">Français</option>
         </select>
       </div>
-    </div>
+    </aside>
   );
-}
+};
 
 export default Header;

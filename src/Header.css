@@ -3,31 +3,91 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 60px; /* Sidebar is small but visible when closed */
   height: 100vh;
   background-color: #333;
   color: white;
-  padding: 20px;
+  padding: 10px;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden; /* Prevents horizontal overflow */
+  overflow-y: auto; /* Allows scrolling if needed */
 }
 
+/* Open state */
+.sidebar.open {
+  width: 250px; /* Expand when open */
+  align-items: flex-start;
+}
+
+/* Hamburger button */
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+/* Navigation menu */
 .sidebar nav ul {
   list-style: none;
   padding: 0;
+  margin-top: 20px;
+  width: 100%;
+  opacity: 0; /* Hide menu items when closed */
+  transition: opacity 0.2s ease-in-out;
+  white-space: nowrap; /* Prevents text wrapping */
+  overflow: hidden; /* Ensures no overflow issues */
 }
 
+.sidebar.open nav ul {
+  opacity: 1; /* Show menu items when open */
+}
+
+/* Menu items */
 .sidebar nav ul li {
-  margin: 15px 0;
+  width: 100%;
+  margin: 10px 0;
 }
 
 .sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: white;
   text-decoration: none;
   font-size: 18px;
+  padding: 10px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Ensures text doesn't overflow */
+}
+
+/* Hide text when closed */
+.sidebar:not(.open) nav ul li a span {
+  display: none;
+}
+
+/* Highlight active link */
+.sidebar nav ul li .active {
+  font-weight: bold;
+  color: #ffcc00;
+  text-decoration: underline;
 }
 
 /* Language Switcher */
 .language-switcher {
-  margin-top: 20px;
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
 }
 
 .language-switcher select {
@@ -35,14 +95,23 @@
   color: white;
   border: none;
   padding: 5px;
+  width: 80%;
+  font-size: 16px;
 }
 
 /* Main content */
 .main-content {
-  margin-left: 220px; /* Push content so it doesn’t overlap sidebar */
+  margin-left: 80px; /* Adjust based on sidebar width */
   padding: 20px;
-  width: calc(100% - 220px);
+  width: calc(100% - 80px);
   overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* When sidebar is open, push content */
+.sidebar.open ~ .main-content {
+  margin-left: 260px;
+  width: calc(100% - 260px);
 }
 
 body {

@@ -24,10 +24,33 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  display: block;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Main content */
+.main-content {
+  padding: 20px;
+  width: 100%; /* Ensure full width */
+  overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Adjust content when sidebar is open */
+.main-content.sidebar-open {
+  margin-left: 250px; /* Content shifts when sidebar is open */
+  width: calc(100% - 250px); /* Adjust content width */
 }
 
 h1 {
@@ -35,24 +58,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -66,3 +72,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+

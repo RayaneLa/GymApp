@@ -1,21 +1,22 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./index.css";
-import App from "./App.jsx";
-import Header from "./Header"; // ✅ Import Header here
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './index.css';
+import './i18n'; // Ensure this is imported here!
+import App from './App.jsx';
+import Header from './Header.jsx';
 
 // Import page components
-import Profile from "./pages/Profile.jsx";
-import Reservations from "./pages/Reservations";
-import Booking from "./pages/Booking";
-import SubscriptionInfo from "./pages/SubscriptionInfo";
-import DiarySchedule from "./pages/DiarySchedule";
+import Profile from './pages/Profile.jsx';
+import Reservations from './pages/Reservations';
+import Booking from './pages/Booking';
+import SubscriptionInfo from './pages/SubscriptionInfo';
+import DiarySchedule from './pages/DiarySchedule';
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
-      <Header /> {/* ✅ Move Header OUTSIDE Routes to keep it visible on all pages */}
+      <Header />  {/* Place Header here so it stays persistent */}
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/profile" element={<Profile />} />
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")).render(
     </Router>
   </StrictMode>
 );
+
 
 
 if ("serviceWorker" in navigator) {

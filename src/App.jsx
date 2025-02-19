@@ -4,18 +4,11 @@ import "./i18n";
 import Header from "./Header";
 
 function App() {
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
+  const { t } = useTranslation();
 
   return (
     <div>
-      <Header changeLanguage={changeLanguage} /> {/* Make sure this is correct */}
-      <div className="main-content">
-        <h1>{t("welcome")}</h1>
-      </div>
+      <h1>{t("welcome")}</h1>
     </div>
   );
 }
