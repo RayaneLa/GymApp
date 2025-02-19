@@ -1,0 +1,12 @@
+{
+  "welcome": "Home",
+  "count": "le compte est",
+  "menu": "Menu",
+  "profile": "Profil",
+  "reservations": "Réservations",
+  "booking": "Réservation",
+  "subscription_info": "Informations sur l'abonnement",
+  "diary_schedule": "Journal/Programme d'entraînement",
+  "language": "Langue",
+  "docs_message": "Cliquez sur les logos Vite et React pour en savoir plus"
+}
