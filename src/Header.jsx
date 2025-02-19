@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from "react-i18next"; // Import useTranslation to access the language change function
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
-  const { i18n } = useTranslation(); // Access i18n directly here
+  const { i18n } = useTranslation();
 
   // Handle language change
   const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng); // This should trigger language switch
+    i18n.changeLanguage(lng);
   };
 
   return (
-    <header>
+    <header className="sidebar">
       <nav>
         <ul>
-          <li><Link to="/">{i18n.t("welcome")}</Link></li> {/* Translate the Home text */}
+          <li><Link to="/">{i18n.t("welcome")}</Link></li>
           <li><Link to="/profile">{i18n.t("profile")}</Link></li>
           <li><Link to="/reservations">{i18n.t("reservations")}</Link></li>
           <li><Link to="/booking">{i18n.t("booking")}</Link></li>
@@ -24,8 +24,8 @@ const Header = () => {
       </nav>
 
       {/* Language Switcher */}
-      <div>
-        <label>{i18n.t("language")}:</label> {/* Translate the language label */}
+      <div className="language-switcher">
+        <label>{i18n.t("language")}:</label>
         <select onChange={(e) => changeLanguage(e.target.value)} value={i18n.language}>
           <option value="en">English</option>
           <option value="nl">Nederlands</option>

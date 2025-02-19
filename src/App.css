@@ -41,21 +41,48 @@
   color: #888;
 }
 
-nav ul {
+/* Make the header a sidebar on the left */
+.sidebar {
+  position: fixed; /* Fixed position to the left side of the screen */
+  top: 0;
+  left: 0;
+  width: 200px; /* Sidebar width */
+  height: 100vh; /* Full screen height */
+  background-color: #333; /* Sidebar background color */
+  color: white; /* Text color */
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+.sidebar nav ul {
   list-style-type: none;
   padding: 0;
 }
 
-nav li {
-  display: inline;
-  margin-right: 15px;
+.sidebar nav ul li {
+  margin-bottom: 15px;
 }
 
-nav a {
+.sidebar nav ul li a {
+  color: white;
   text-decoration: none;
-  color: #007bff;
+  font-size: 18px;
 }
 
-nav a:hover {
-  text-decoration: underline;
+.sidebar .language-switcher {
+  margin-top: 20px;
 }
+
+.sidebar .language-switcher select {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+}
+
+body {
+  margin-left: 220px; /* Add space on the left side to avoid content overlap with sidebar */
+  font-family: Arial, sans-serif;
+}
+
