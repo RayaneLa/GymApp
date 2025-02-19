@@ -1,21 +1,22 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Correct imports for v6
-import './index.css';
-import App from './App.jsx';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./index.css";
+import App from "./App.jsx";
+import Header from "./Header"; // ✅ Import Header here
 
 // Import page components
-import Profile from './pages/Profile.jsx';
-import Reservations from './pages/Reservations';
-import Booking from './pages/Booking';
-import SubscriptionInfo from './pages/SubscriptionInfo';
-import DiarySchedule from './pages/DiarySchedule';
+import Profile from "./pages/Profile.jsx";
+import Reservations from "./pages/Reservations";
+import Booking from "./pages/Booking";
+import SubscriptionInfo from "./pages/SubscriptionInfo";
+import DiarySchedule from "./pages/DiarySchedule";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
+      <Header /> {/* ✅ Move Header OUTSIDE Routes to keep it visible on all pages */}
       <Routes>
-        {/* Using element prop to specify the component */}
         <Route path="/" element={<App />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/reservations" element={<Reservations />} />
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
     </Router>
   </StrictMode>
 );
+
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

@@ -1,39 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import "./Header.css";
 
-const Header = () => {
-  const { i18n } = useTranslation();
+function Header() {
+  const { t, i18n } = useTranslation(); // ✅ Get t and i18n from the hook
 
-  // Handle language change
+  // Language change function
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
   return (
-    <header className="sidebar">
+    <div className="sidebar">
       <nav>
         <ul>
-          <li><Link to="/">{i18n.t("welcome")}</Link></li>
-          <li><Link to="/profile">{i18n.t("profile")}</Link></li>
-          <li><Link to="/reservations">{i18n.t("reservations")}</Link></li>
-          <li><Link to="/booking">{i18n.t("booking")}</Link></li>
-          <li><Link to="/subscription_info">{i18n.t("subscription_info")}</Link></li>
-          <li><Link to="/diary_schedule">{i18n.t("diary_schedule")}</Link></li>
+          <li><Link to="/">{t("home")}</Link></li>
+          <li><Link to="/profile">{t("profile")}</Link></li>
+          <li><Link to="/reservations">{t("reservations")}</Link></li>
+          <li><Link to="/booking">{t("booking")}</Link></li>
+          <li><Link to="/subscription_info">{t("subscription")}</Link></li>
+          <li><Link to="/diary_schedule">{t("diary_schedule")}</Link></li>
         </ul>
       </nav>
 
-      {/* Language Switcher */}
       <div className="language-switcher">
-        <label>{i18n.t("language")}:</label>
-        <select onChange={(e) => changeLanguage(e.target.value)} value={i18n.language}>
-          <option value="en">English</option>
-          <option value="nl">Nederlands</option>
-          <option value="fr">Français</option>
+        <select onChange={(e) => changeLanguage(e.target.value)}>
+          <option value="en">{t("english")}</option>
+          <option value="fr">{t("french")}</option>
+          <option value="nl">{t("dutch")}</option>
         </select>
       </div>
-    </header>
+    </div>
   );
-};
+}
 
 export default Header;

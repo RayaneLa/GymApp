@@ -1,0 +1,51 @@
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* Language Switcher */
+.language-switcher {
+  margin-top: 20px;
+}
+
+.language-switcher select {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 5px;
+}
+
+/* Main content */
+.main-content {
+  margin-left: 220px; /* Push content so it doesn’t overlap sidebar */
+  padding: 20px;
+  width: calc(100% - 220px);
+  overflow-y: auto;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}

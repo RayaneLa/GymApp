@@ -1,8 +1,7 @@
-import './App.css';
+import "./App.css";
 import { useTranslation } from "react-i18next";
-import { Link } from 'react-router-dom';
 import "./i18n";
-import Header from './Header';
+import Header from "./Header";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -13,11 +12,10 @@ function App() {
 
   return (
     <div>
-      {/* Include the Header with menu items and language switcher */}
-      <Header changeLanguage={changeLanguage} />
-
-      <h1>{t("welcome")}</h1>
-
+      <Header changeLanguage={changeLanguage} /> {/* Make sure this is correct */}
+      <div className="main-content">
+        <h1>{t("welcome")}</h1>
+      </div>
     </div>
   );
 }
