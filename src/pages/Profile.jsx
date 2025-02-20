@@ -1,7 +1,10 @@
-// src/pages/Profile.jsx
-function Profile() {
-    return <div>Profile Page</div>;
-  }
-  
-  export default Profile;
-  
+const Profile = () => {
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">My Profile</h1>
+      <p>Welcome to your profile page.</p>
+    </div>
+  );
+};
+
+export default Profile;

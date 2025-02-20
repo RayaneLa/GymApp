@@ -8,5 +8,9 @@
   "subscription_info": "Informations sur l'abonnement",
   "diary_schedule": "Journal/Programme d'entraînement",
   "language": "Langue",
-  "docs_message": "Cliquez sur les logos Vite et React pour en savoir plus"
+  "docs_message": "Cliquez sur les logos Vite et React pour en savoir plus",
+  "header": "Sélectionnez la date et l'heure",
+  "availableClasses": "Cours disponibles",
+  "noClassesAvailable": "Aucun cours disponible.",
+  "participants": "{{current}}/{{total}} participants"
 }

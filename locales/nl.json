@@ -8,5 +8,9 @@
   "subscription_info": "Abonnement Informatie",
   "diary_schedule": "Dagboek/Trainingsschema",
   "language": "Taal",
-  "docs_message": "Klik op de Vite en React-logo's om meer te leren"
+  "docs_message": "Klik op de Vite en React-logo's om meer te leren",
+  "header": "Selecteer datum en tijd",
+  "availableClasses": "Beschikbare lessen",
+  "noClassesAvailable": "Geen lessen beschikbaar.",
+  "participants": "{{current}}/{{total}} deelnemers"
 }

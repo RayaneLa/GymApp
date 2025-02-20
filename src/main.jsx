@@ -5,6 +5,7 @@ import './index.css';
 import './i18n'; // Ensure this is imported here!
 import App from './App.jsx';
 import Header from './Header.jsx';
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Import page components
 import Profile from './pages/Profile.jsx';
@@ -16,6 +17,7 @@ import DiarySchedule from './pages/DiarySchedule';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
+      <ErrorBoundary>
       <Header />  {/* Place Header here so it stays persistent */}
       <Routes>
         <Route path="/" element={<App />} />
@@ -25,6 +27,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/subscription_info" element={<SubscriptionInfo />} />
         <Route path="/diary_schedule" element={<DiarySchedule />} />
       </Routes>
+      </ErrorBoundary>
     </Router>
   </StrictMode>
 );

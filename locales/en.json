@@ -7,5 +7,9 @@
   "booking": "Booking",
   "subscription_info": "Subscription Information",
   "diary_schedule": "Diary/Training Schedule",
-  "language": "Language"
+  "language": "Language",
+  "header": "Select Date and Time",
+  "availableClasses": "Available Classes",
+  "noClassesAvailable": "No classes available.",
+  "participants": "{{current}}/{{total}} participants"
 }
