@@ -3,19 +3,18 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
-
-
 const firebaseConfig = {
-    apiKey: "AIzaSyBzAw2gMRd2KVySJu0v5G3LiDfftejfu4E",
-    authDomain: "sytra-studio.firebaseapp.com",
-    projectId: "sytra-studio",
-    storageBucket: "sytra-studio.firebasestorage.app",
-    messagingSenderId: "696404614526",
-    appId: "1:696404614526:web:426626b0ab6004bc4ca72f",
-    measurementId: "G-3Z47DDR8ZH"
-  };
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+};
 
 const app = initializeApp(firebaseConfig);
+console.log("Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
 
 const db = getFirestore(app);
 const auth = getAuth(app);
