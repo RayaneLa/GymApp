@@ -44,21 +44,19 @@ body {
   padding: 20px;
   width: 100%; /* Ensure full width */
   overflow-y: auto;
-  transition: margin-left 0.3s ease-in-out; /* Smooth transition */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+  z-index: 1; /* Ensure main content is below the sidebar */
 }
 
 /* Adjust content when sidebar is open */
 .main-content.sidebar-open {
-  margin-left: 250px; /* Content shifts when sidebar is open */
-  width: calc(100% - 250px); /* Adjust content width */
+  transform: translateX(190px); /* Content shifts when sidebar is open */
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
-
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -70,6 +68,18 @@ h1 {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 60px; /* Adjust based on smaller sidebar width */
+    width: calc(100% - 60px);
+  }
+
+  .main-content.sidebar-open {
+    transform: translateX(150px); /* Adjust based on smaller expanded sidebar width */
   }
 }
 

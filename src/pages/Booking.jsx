@@ -19,8 +19,7 @@ const Booking = () => {
   const { t } = useTranslation(); // Initialize the translation function
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [time, setTime] = useState("");
-  const [participants, setParticipants] = useState(1);
-  const [maxParticipants, setMaxParticipants] = useState(10);
+  const [maxParticipants, setMaxParticipants] = useState(""); // Set initial state to empty string
   const [availableTimes, setAvailableTimes] = useState([]);
   const [existingReservations, setExistingReservations] = useState([]);
   const [message, setMessage] = useState("");
@@ -67,11 +66,16 @@ const Booking = () => {
       return;
     }
 
+    if (!maxParticipants || isNaN(maxParticipants) || maxParticipants <= 0) {
+      setMessage(t("invalidMaxParticipants"));
+      return;
+    }
+
     const reservationData = {
       date: formattedDate,
       time,
-      participants,
-      maxParticipants,
+      participants: 0, // Default to 0 participants initially
+      maxParticipants: Number(maxParticipants),
     };
 
     try {
@@ -134,28 +138,17 @@ const Booking = () => {
           </Box>
         )}
 
-        {/* Participants & Max Participants */}
+        {/* Max Participants */}
         <Box mb={4}>
           <Typography variant="h6" gutterBottom>
-            {t("participants")}
+            {t("maxParticipants")}
           </Typography>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <TextField
-                type="number"
-                value={participants}
-                onChange={(e) => setParticipants(Number(e.target.value))}
-                label={t("participants")}
-                variant="outlined"
-                fullWidth
-                inputProps={{ min: 1, max: maxParticipants }}
-              />
-            </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 type="number"
                 value={maxParticipants}
-                onChange={(e) => setMaxParticipants(Number(e.target.value))}
+                onChange={(e) => setMaxParticipants(e.target.value)}
                 label={t("maxParticipants")}
                 variant="outlined"
                 fullWidth

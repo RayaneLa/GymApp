@@ -18,21 +18,21 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
       <ErrorBoundary>
-      <Header />  {/* Place Header here so it stays persistent */}
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/reservations" element={<Reservations />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/subscription_info" element={<SubscriptionInfo />} />
-        <Route path="/diary_schedule" element={<DiarySchedule />} />
-      </Routes>
+        <Header />  {/* Place Header here so it stays persistent */}
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/reservations" element={<Reservations />} />
+            <Route path="/booking" element={<Booking />} />
+            <Route path="/subscription_info" element={<SubscriptionInfo />} />
+            <Route path="/diary_schedule" element={<DiarySchedule />} />
+          </Routes>
+        </div>
       </ErrorBoundary>
     </Router>
   </StrictMode>
 );
-
-
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
