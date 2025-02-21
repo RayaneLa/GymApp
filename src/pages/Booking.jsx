@@ -13,8 +13,10 @@ import {
   Box,
   Alert,
 } from "@mui/material";
+import { useTranslation } from "react-i18next"; // Import the useTranslation hook
 
 const Booking = () => {
+  const { t } = useTranslation(); // Initialize the translation function
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [time, setTime] = useState("");
   const [participants, setParticipants] = useState(1);
@@ -42,11 +44,11 @@ const Booking = () => {
   useEffect(() => {
     const generateAvailableTimes = () => {
       const allTimes = [
-        { label: "10:00 AM - 11:00 AM", value: "10:00 AM - 11:00 AM" },
-        { label: "11:00 AM - 12:00 PM", value: "11:00 AM - 12:00 PM" },
-        { label: "12:00 PM - 1:00 PM", value: "12:00 PM - 1:00 PM" },
-        { label: "1:00 PM - 2:00 PM", value: "1:00 PM - 2:00 PM" },
-        { label: "2:00 PM - 3:00 PM", value: "2:00 PM - 3:00 PM" },
+        { label: t("timeSlot1"), value: "10:00 AM - 11:00 AM" },
+        { label: t("timeSlot2"), value: "11:00 AM - 12:00 PM" },
+        { label: t("timeSlot3"), value: "12:00 PM - 1:00 PM" },
+        { label: t("timeSlot4"), value: "1:00 PM - 2:00 PM" },
+        { label: t("timeSlot5"), value: "2:00 PM - 3:00 PM" },
       ];
 
       // Filter out times that are already reserved
@@ -57,11 +59,11 @@ const Booking = () => {
     };
 
     generateAvailableTimes();
-  }, [existingReservations]);
+  }, [existingReservations, t]);
 
   const handleBooking = async () => {
     if (!time) {
-      setMessage("Please select a time slot.");
+      setMessage(t("selectTimeSlot"));
       return;
     }
 
@@ -74,13 +76,13 @@ const Booking = () => {
 
     try {
       await addDoc(collection(db, "reservations"), reservationData);
-      setMessage("Reservation successful!");
+      setMessage(t("reservationSuccess"));
       // After booking, refresh the reservations list
       const updatedReservations = [...existingReservations, reservationData];
       setExistingReservations(updatedReservations);
     } catch (error) {
       console.error("Error making reservation:", error);
-      setMessage("Error making reservation: " + error.message);
+      setMessage(t("reservationError") + ": " + error.message);
     }
   };
 
@@ -88,7 +90,7 @@ const Booking = () => {
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom align="center">
-          Book Your Class
+          {t("bookYourClass")}
         </Typography>
 
         {/* Date Picker */}
@@ -103,7 +105,7 @@ const Booking = () => {
         {/* Available Times */}
         <Box mb={4}>
           <Typography variant="h6" gutterBottom>
-            Select Time
+            {t("selectTime")}
           </Typography>
           <Grid container spacing={2}>
             {availableTimes.length > 0 ? (
@@ -120,7 +122,7 @@ const Booking = () => {
                 </Grid>
               ))
             ) : (
-              <Typography color="textSecondary">No available times for this date.</Typography>
+              <Typography color="textSecondary">{t("noAvailableTimes")}</Typography>
             )}
           </Grid>
         </Box>
@@ -128,14 +130,14 @@ const Booking = () => {
         {/* Display Selected Time */}
         {time && (
           <Box mb={4}>
-            <Typography variant="h6">Selected Time: {time}</Typography>
+            <Typography variant="h6">{t("selectedTime")}: {time}</Typography>
           </Box>
         )}
 
         {/* Participants & Max Participants */}
         <Box mb={4}>
           <Typography variant="h6" gutterBottom>
-            Participants
+            {t("participants")}
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -143,7 +145,7 @@ const Booking = () => {
                 type="number"
                 value={participants}
                 onChange={(e) => setParticipants(Number(e.target.value))}
-                label="Participants"
+                label={t("participants")}
                 variant="outlined"
                 fullWidth
                 inputProps={{ min: 1, max: maxParticipants }}
@@ -154,7 +156,7 @@ const Booking = () => {
                 type="number"
                 value={maxParticipants}
                 onChange={(e) => setMaxParticipants(Number(e.target.value))}
-                label="Max Participants"
+                label={t("maxParticipants")}
                 variant="outlined"
                 fullWidth
                 inputProps={{ min: 1 }}
@@ -171,14 +173,14 @@ const Booking = () => {
             onClick={handleBooking}
             fullWidth
           >
-            Book Now
+            {t("bookNow")}
           </Button>
         </Box>
 
         {/* Message */}
         {message && (
           <Box mb={4}>
-            <Alert severity={message.includes("successful") ? "success" : "error"}>
+            <Alert severity={message.includes(t("reservationSuccess")) ? "success" : "error"}>
               {message}
             </Alert>
           </Box>
@@ -187,20 +189,20 @@ const Booking = () => {
         {/* Existing Reservations */}
         <Box mt={8}>
           <Typography variant="h6" gutterBottom>
-            Existing Reservations
+            {t("existingReservations")}
           </Typography>
           <Grid container spacing={2}>
             {existingReservations.length > 0 ? (
               existingReservations.map((reservation, index) => (
                 <Grid item xs={12} key={index}>
                   <Paper variant="outlined" className="p-2">
-                    <Typography><strong>Time:</strong> {reservation.time}</Typography>
-                    <Typography><strong>Participants:</strong> {reservation.participants}/{reservation.maxParticipants}</Typography>
+                    <Typography><strong>{t("time")}:</strong> {reservation.time}</Typography>
+                    <Typography><strong>{t("participants")}:</strong> {reservation.participants}/{reservation.maxParticipants}</Typography>
                   </Paper>
                 </Grid>
               ))
             ) : (
-              <Typography color="textSecondary">No reservations for this date.</Typography>
+              <Typography color="textSecondary">{t("noReservationsForDate")}</Typography>
             )}
           </Grid>
         </Box>

@@ -12,8 +12,10 @@ import {
   Button,
   Alert,
 } from "@mui/material";
+import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 
 const Reservations = ({ userId }) => {
+  const { t } = useTranslation(); // Initialize the translation function
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [reservations, setReservations] = useState([]);
   const [userReservations, setUserReservations] = useState([]);
@@ -50,7 +52,7 @@ const Reservations = ({ userId }) => {
       const reservation = reservations.find((res) => res.id === reservationId);
 
       if (reservation.participants >= reservation.maxParticipants) {
-        setMessage("This reservation is full.");
+        setMessage(t("reservationFull"));
         return;
       }
 
@@ -61,7 +63,7 @@ const Reservations = ({ userId }) => {
         participantsList: updatedParticipantsList,
       });
 
-      setMessage("Successfully enrolled in the reservation.");
+      setMessage(t("enrollmentSuccess"));
       setReservations((prev) =>
         prev.map((res) =>
           res.id === reservationId
@@ -72,7 +74,7 @@ const Reservations = ({ userId }) => {
       setUserReservations((prev) => [...prev, { ...reservation, participants: reservation.participants + 1, participantsList: updatedParticipantsList }]);
     } catch (error) {
       console.error("Error enrolling in reservation:", error);
-      setMessage("Error enrolling in reservation: " + error.message);
+      setMessage(t("enrollmentError") + ": " + error.message);
     }
   };
 
@@ -80,7 +82,7 @@ const Reservations = ({ userId }) => {
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom align="center">
-          View Reservations
+          {t("viewReservations")}
         </Typography>
 
         {/* Date Picker */}
@@ -95,28 +97,28 @@ const Reservations = ({ userId }) => {
         {/* Reservations List */}
         <Box mt={4}>
           <Typography variant="h6" gutterBottom>
-            Reservations for {formattedDate}
+            {t("reservationsFor")} {formattedDate}
           </Typography>
           <Grid container spacing={2}>
             {reservations.length > 0 ? (
               reservations.map((reservation, index) => (
                 <Grid item xs={12} key={index}>
                   <Paper variant="outlined" className="p-2">
-                    <Typography><strong>Time:</strong> {reservation.time}</Typography>
-                    <Typography><strong>Participants:</strong> {reservation.participants}/{reservation.maxParticipants}</Typography>
+                    <Typography><strong>{t("time")}:</strong> {reservation.time}</Typography>
+                    <Typography><strong>{t("participants")}:</strong> {reservation.participants}/{reservation.maxParticipants}</Typography>
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => handleEnroll(reservation.id)}
                       disabled={reservation.participants >= reservation.maxParticipants || (reservation.participantsList && reservation.participantsList.includes(userId))}
                     >
-                      Enroll
+                      {t("enroll")}
                     </Button>
                   </Paper>
                 </Grid>
               ))
             ) : (
-              <Typography color="textSecondary">No reservations available</Typography>
+              <Typography color="textSecondary">{t("noReservationsAvailable")}</Typography>
             )}
           </Grid>
         </Box>
@@ -124,7 +126,7 @@ const Reservations = ({ userId }) => {
         {/* Message */}
         {message && (
           <Box mt={4}>
-            <Alert severity={message.includes("successfully") ? "success" : "error"}>
+            <Alert severity={message.includes(t("successfully")) ? "success" : "error"}>
               {message}
             </Alert>
           </Box>
@@ -133,21 +135,21 @@ const Reservations = ({ userId }) => {
         {/* User's Enrolled Reservations */}
         <Box mt={8}>
           <Typography variant="h6" gutterBottom>
-            Your Enrolled Reservations
+            {t("yourEnrolledReservations")}
           </Typography>
           <Grid container spacing={2}>
             {userReservations.length > 0 ? (
               userReservations.map((reservation, index) => (
                 <Grid item xs={12} key={index}>
                   <Paper variant="outlined" className="p-2">
-                    <Typography><strong>Date:</strong> {reservation.date}</Typography>
-                    <Typography><strong>Time:</strong> {reservation.time}</Typography>
-                    <Typography><strong>Participants:</strong> {reservation.participants}/{reservation.maxParticipants}</Typography>
+                    <Typography><strong>{t("date")}:</strong> {reservation.date}</Typography>
+                    <Typography><strong>{t("time")}:</strong> {reservation.time}</Typography>
+                    <Typography><strong>{t("participants")}:</strong> {reservation.participants}/{reservation.maxParticipants}</Typography>
                   </Paper>
                 </Grid>
               ))
             ) : (
-              <Typography color="textSecondary">No enrolled reservations</Typography>
+              <Typography color="textSecondary">{t("noEnrolledReservations")}</Typography>
             )}
           </Grid>
         </Box>
