@@ -44,13 +44,14 @@ body {
   padding: 20px;
   width: 100%; /* Ensure full width */
   overflow-y: auto;
-  transition: transform 0.3s ease-in-out; /* Smooth transition */
+  transition: margin-left 0.3s ease-in-out; /* Smooth transition */
   z-index: 1; /* Ensure main content is below the sidebar */
 }
 
 /* Adjust content when sidebar is open */
 .main-content.sidebar-open {
-  transform: translateX(190px); /* Content shifts when sidebar is open */
+  margin-left: 250px; /* Content shifts when sidebar is open */
+  width: calc(100% - 250px); /* Adjust content width */
 }
 
 h1 {
@@ -79,7 +80,8 @@ h1 {
   }
 
   .main-content.sidebar-open {
-    transform: translateX(150px); /* Adjust based on smaller expanded sidebar width */
+    margin-left: 210px; /* Adjust based on smaller expanded sidebar width */
+    width: calc(100% - 210px);
   }
 }
 
