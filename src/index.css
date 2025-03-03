@@ -43,15 +43,16 @@ body {
 .main-content {
   padding: 20px;
   width: 100%; /* Ensure full width */
-  overflow-y: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
   transition: margin-left 0.3s ease-in-out; /* Smooth transition */
   z-index: 1; /* Ensure main content is below the sidebar */
+  height: calc(100vh - 64px); /* Adjust height to account for header */
 }
 
-/* Adjust content when sidebar is open */
-.main-content.sidebar-open {
-  margin-left: 250px; /* Content shifts when sidebar is open */
-  width: calc(100% - 250px); /* Adjust content width */
+.main-content::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 h1 {
